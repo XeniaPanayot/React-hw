@@ -1,0 +1,11 @@
+.content__theme {
+    width: 100%;
+    height: auto;
+}
+.content__avatar {
+    width: 222px;
+    height: auto;
+}
+.content__description {
+    background-color: lightgrey;
+}

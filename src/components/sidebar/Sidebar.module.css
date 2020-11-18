@@ -1,0 +1,14 @@
+.sidebar {
+    grid-area: sidebar;
+    background-color: darksalmon;
+}
+.sidebar__item {
+    padding: 14px;
+}
+.sidebar__list {
+    list-style: none;
+}
+.sidebar__link {
+    color: darkolivegreen;
+    font-size: x-large;
+}

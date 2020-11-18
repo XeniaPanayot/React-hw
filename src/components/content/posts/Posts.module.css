@@ -1,0 +1,15 @@
+.title {
+    color: darkslateblue;
+}
+.textarea {
+    border: 1px solid darkslateblue;
+}
+.posts__submit {
+    background-color: darkslateblue;
+    color: aliceblue;
+    padding: 5px 15px;
+}
+.post__avatar {
+    width: 100px;
+    height: auto;
+}
