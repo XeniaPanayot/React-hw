@@ -1,23 +1,24 @@
 import React from "react";
 import styles from './Sidebar.module.css';
+import {NavLink} from "react-router-dom";
 
 const Sidebar = () => {
     return <aside className={styles.sidebar}>
         <ul className={styles.sidebar__list}>
             <li className={styles.sidebar__item}>
-                <a href="/home" className={styles.sidebar__link}>Home</a>
+                <NavLink to="/home" className={styles.sidebar__link} activeClassName={styles.active}>Home</NavLink>
             </li>
             <li className={styles.sidebar__item}>
-                <a href="/messages" className={styles.sidebar__link}>Messages</a>
+                <NavLink to="/messages" className={styles.sidebar__link} activeClassName={styles.active}>Messages</NavLink>
             </li>
             <li className={styles.sidebar__item}>
-                <a href="/news" className={styles.sidebar__link}>News</a>
+                <NavLink to="/news" className={styles.sidebar__link} activeClassName={styles.active}>News</NavLink>
             </li>
             <li className={styles.sidebar__item}>
-                <a href="/blog" className={styles.sidebar__link}>Blog</a>
+                <NavLink to="/blog" className={styles.sidebar__link} activeClassName={styles.active}>Blog</NavLink>
             </li>
             <li className={styles.sidebar__item}>
-                <a href="/contacts" className={styles.sidebar__link}>Contact me</a>
+                <NavLink to="/contacts" className={styles.sidebar__link} activeClassName={styles.active}>Contact me</NavLink>
             </li>
         </ul>
     </aside>
