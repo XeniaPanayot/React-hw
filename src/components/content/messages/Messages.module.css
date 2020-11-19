@@ -1,29 +1,29 @@
 .container {
     display: grid;
     grid-template-columns: 2fr 10fr;
-    padding: 10px;
+    padding: 15px;
 }
 
-h1 {
-    font-size: 22px;
-    color: goldenrod;
-}
 .dialoguesList {
     list-style: none;
-    margin: 0;
 }
+
 .dialoguesItem {
-    color: aliceblue;
-    padding-bottom: 10px;
+    padding-bottom: 33px;
 }
-.dialoguesItem.active {
+.dialoguesLink {
+    text-decoration: none;
     font-size: 22px;
-    color: goldenrod;
+    color: palegoldenrod;
+    padding-bottom: 20px;
 }
+
 .messagesList {
     list-style: none;
 }
 .messagesItem {
     font-style: italic;
-    padding-bottom: 15px;
+    font-size: 20px;
+    color: palegoldenrod;
+    padding-bottom: 20px;
 }

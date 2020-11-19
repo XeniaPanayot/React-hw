@@ -1,3 +1,7 @@
+.post {
+    background-color: bisque;
+    padding: 10px;
+}
 .post__avatar {
     width: 100px;
     height: auto;
