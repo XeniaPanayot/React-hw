@@ -1,8 +1,11 @@
 import React from "react";
 import styles from './MainContent.module.css';
-import Posts from "./posts/Posts";
+import MyPosts from "./posts/MyPosts";
 
-const MainContent = () => {
+type MainContentPropsType = {
+    postsData: Array< {id: number, name: string, message: string, likecount: number, btnName: string}>
+}
+const MainContent = (props: MainContentPropsType) => {
     return  <article>
         <img className={styles.content__theme} src="https://thumbs.dreamstime.com/b/panorama-granada-sunset-spa-panorama-granada-sunset-spain-187576368.jpg" alt="MainContent theme"/>
         <div>
@@ -12,7 +15,7 @@ const MainContent = () => {
                 <p>Hobbies</p>
             </div>
         </div>
-        <Posts cols={50} rows={50} id={`newPost`} name={`newPost`}/>
+        <MyPosts postsData={props.postsData} />
     </article>
 }
 

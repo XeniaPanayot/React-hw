@@ -17,34 +17,34 @@ const PostText = (props: PostTextPropsType) => {
     </div>
 }
 type LikesBtnPropsType = {
-    likecount: string
-    btnName: string
+    likecount: number
 }
 const LikesBtn = (props: LikesBtnPropsType) => {
-    return         <div className={styles.LikesNCounts}>
-        <button className={styles.LikesBtn}>{props.btnName}</button>
+    return         <div className={styles.likesNcounts}>
+        <button className={styles.likesBtn}></button>
         <PostLikes likecount={props.likecount}/>
     </div>
-
 }
 type PostLikesPropsType = {
-    likecount: string
+    likecount: number
 }
 const PostLikes = (props: PostLikesPropsType) => {
     return <span>{props.likecount}</span>
 }
+
 type PostPropsType = {
+    id: number
+    likecount: number
     message: string
-    likecount: string
-    btnName: string
 }
 const Post = (props: PostPropsType) => {
+
     return <div className={styles.post}>
         <PostAvatar
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRg8RxCu-qCakoz8wPiwwzxpnxZFCpJ2XNWgA&usqp=CAU"
             alt="User's avatar"/>
-        <PostText message={props.message}/>
-        <LikesBtn likecount={props.likecount} btnName={props.btnName}/>
+            <PostText message={props.message}/>
+        <LikesBtn likecount={props.likecount}/>
     </div>
 }
 

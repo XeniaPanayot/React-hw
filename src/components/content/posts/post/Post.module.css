@@ -7,3 +7,40 @@
     height: auto;
     border-radius: 50%;
 }
+
+.likesBtn {
+    padding: 10px;
+    margin-right: 15px;
+}
+
+/*.likesBtn {*/
+/*    display: inline-block;*/
+/*    position: relative;*/
+/*    font-size: 32px;*/
+/*    cursor: pointer;*/
+/*    border: 1px solid black;*/
+/*}*/
+/*.likesBtn::before {*/
+/*    font-size: 3em;*/
+/*    color: #000;*/
+/*    content: '♥';*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*  }*/
+/*.likesBtn::after {*/
+/*    font-size: 3em;*/
+/*    color: red;*/
+/*    content: '♥';*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%) scale(0);*/
+/*    transition: transform 0.2s;*/
+/*  }*/
+/*.likesBtn.liked::after {*/
+/*    transform: translate(-50%, -50%) scale(1.1);*/
+/*  }*/
+
+
