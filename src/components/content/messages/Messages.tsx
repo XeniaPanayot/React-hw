@@ -6,16 +6,25 @@ type MessagesItemPropsType = {
     text: string
 }
 
-const MessagesItem = (props: MessagesItemPropsType) => {
-    return <li className={styles.messagesItem}>{props.text}</li>
+// const MessagesItem = (props: MessagesItemPropsType) => {
+//     return <li className={styles.messagesItem}>{props.text}</li>
+// }
+
+type MessagesPropsType = {
+    dialoguesPage: {
+        dialogues: Array<{ id: number, name: string }>,
+        dialogueMessages: Array<{ id: number, text: string }>
+    }
 }
+const Messages = (props: MessagesPropsType) => {
+    const MessagesItem = (props: MessagesItemPropsType) => {
+        return <li className={styles.messagesItem}>{props.text}</li>
+    }
 
+    let messagesElements = props.dialoguesPage.dialogueMessages.map(m => <MessagesItem id ={m.id} text={m.text}/>);
 
-const Messages = () => {
-    let messages = [{id: 1, text: "Hej"}, {id: 2, text: "Haj"}, {id: 3, text: "H0j"}];
-    let messagesElement = messages.map(m => <MessagesItem id ={m.id} text={m.text}/>);
     return  <ul className={styles.messagesList}>
-                { messagesElement }
+                { messagesElements }
             </ul>
 }
 

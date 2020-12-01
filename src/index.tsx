@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import state from "./data/state";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App
+        myProfile={state.homePage.myProfile}
+        posts={state.homePage.posts}
+        dialoguesPage={state.dialoguesPage}
+        friends={state.friends}
+    />
   </React.StrictMode>,
   document.getElementById('root')
 );

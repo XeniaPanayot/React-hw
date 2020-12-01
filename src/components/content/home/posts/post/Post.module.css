@@ -2,8 +2,8 @@
     background-color: bisque;
     padding: 10px;
 }
-.post__avatar {
-    width: 100px;
+.postAvatar {
+    width: 33px;
     height: auto;
     border-radius: 50%;
 }

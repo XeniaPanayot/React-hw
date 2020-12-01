@@ -20,7 +20,7 @@ type LikesBtnPropsType = {
     likecount: number
 }
 const LikesBtn = (props: LikesBtnPropsType) => {
-    return         <div className={styles.likesNcounts}>
+    return <div className={styles.likesNcounts}>
         <button className={styles.likesBtn}></button>
         <PostLikes likecount={props.likecount}/>
     </div>
@@ -34,16 +34,16 @@ const PostLikes = (props: PostLikesPropsType) => {
 
 type PostPropsType = {
     id: number
+    avatar: string
+    alt: string
     likecount: number
     message: string
 }
-const Post = (props: PostPropsType) => {
 
+const Post = (props: PostPropsType) => {
     return <div className={styles.post}>
-        <PostAvatar
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRg8RxCu-qCakoz8wPiwwzxpnxZFCpJ2XNWgA&usqp=CAU"
-            alt="User's avatar"/>
-            <PostText message={props.message}/>
+        <img className={styles.postAvatar} src={props.avatar} alt={props.alt}/>
+        <PostText message={props.message}/>
         <LikesBtn likecount={props.likecount}/>
     </div>
 }

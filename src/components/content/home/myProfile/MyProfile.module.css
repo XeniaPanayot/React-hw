@@ -1,0 +1,16 @@
+.myProfile {
+    display: flex;
+    padding: 15px;
+}
+.avatar {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+.description {
+    background-color: lightgrey;
+    width: 70%;
+    border-radius: 5px;
+    padding: 10px;
+}

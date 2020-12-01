@@ -1,26 +1,33 @@
 import React from "react";
 import styles from './Sidebar.module.css';
 import {NavLink} from "react-router-dom";
+import Friends from "./Friends";
 
-const Sidebar = () => {
-    return <aside className={styles.sidebar}>
-        <ul className={styles.sidebar__list}>
-            <li className={styles.sidebar__item}>
-                <NavLink to="/home" className={styles.sidebar__link} activeClassName={styles.active}>Home</NavLink>
+type SidebarPropsType = {
+    friends: Array<{ id: number, name: string }>
+}
+const Sidebar = (props: SidebarPropsType) => {
+    return <aside className={styles.sidebarMenu}>
+        <ul className={styles.sidebarList}>
+            <li className={styles.sidebarItem}>
+                <NavLink to="/home" className={styles.sidebarLink} activeClassName={styles.active}>Home</NavLink>
             </li>
-            <li className={styles.sidebar__item}>
-                <NavLink to="/messages" className={styles.sidebar__link} activeClassName={styles.active}>Messages</NavLink>
+            <li className={styles.sidebarItem}>
+                <NavLink to="/messages" className={styles.sidebarLink} activeClassName={styles.active}>Messages</NavLink>
             </li>
-            <li className={styles.sidebar__item}>
-                <NavLink to="/news" className={styles.sidebar__link} activeClassName={styles.active}>News</NavLink>
+            <li className={styles.sidebarItem}>
+                <NavLink to="/news" className={styles.sidebarLink} activeClassName={styles.active}>News</NavLink>
             </li>
-            <li className={styles.sidebar__item}>
-                <NavLink to="/blog" className={styles.sidebar__link} activeClassName={styles.active}>Blog</NavLink>
+            <li className={styles.sidebarItem}>
+                <NavLink to="/blog" className={styles.sidebarLink} activeClassName={styles.active}>Blog</NavLink>
             </li>
-            <li className={styles.sidebar__item}>
-                <NavLink to="/contacts" className={styles.sidebar__link} activeClassName={styles.active}>Contact me</NavLink>
+            <li className={styles.sidebarItem}>
+                <NavLink to="/contacts" className={styles.sidebarLink} activeClassName={styles.active}>Contact me</NavLink>
             </li>
         </ul>
+
+        <Friends friends={props.friends} />
+
     </aside>
 }
 

@@ -1,14 +1,15 @@
-.sidebar {
+.sidebarMenu {
     grid-area: sidebar;
     background-color: darksalmon;
 }
-.sidebar__item {
+.sidebarItem {
     padding: 14px;
 }
-.sidebar__list {
+.sidebarList,
+.friendsList {
     list-style: none;
 }
-.sidebar__link {
+.sidebarLink {
     color: darkolivegreen;
     font-size: x-large;
     text-decoration: none;
