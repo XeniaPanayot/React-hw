@@ -3,14 +3,16 @@ import styles from './Sidebar.module.css';
 import {NavLink} from "react-router-dom";
 
 type FriendPropsType = {
-    id: number
+    id: string
     name: string
 }
 const Friend = (props: FriendPropsType) => {
 
     return <li>
-        <div>{props.name}</div>
-        <img src="" alt=""/>
+        <NavLink to={""}>
+            <div>{props.name}</div>
+            <img src="" alt=""/>
+        </NavLink>
     </li>
 }
 

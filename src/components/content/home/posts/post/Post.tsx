@@ -19,33 +19,31 @@ const PostText = (props: PostTextPropsType) => {
 type LikesBtnPropsType = {
     likecount: number
 }
-const LikesBtn = (props: LikesBtnPropsType) => {
+export const LikesBtn = (props: LikesBtnPropsType) => {
     return <div className={styles.likesNcounts}>
         <button className={styles.likesBtn}></button>
         <PostLikes likecount={props.likecount}/>
     </div>
 }
-type PostLikesPropsType = {
+export type PostLikesPropsType = {
     likecount: number
 }
 const PostLikes = (props: PostLikesPropsType) => {
     return <span>{props.likecount}</span>
 }
 
-type PostPropsType = {
-    id: number
+export type PostPropsType = {
+    id: string
     avatar: string
     alt: string
     likecount: number
     message: string
 }
 
-const Post = (props: PostPropsType) => {
+export const Post = (props: PostPropsType) => {
     return <div className={styles.post}>
         <img className={styles.postAvatar} src={props.avatar} alt={props.alt}/>
         <PostText message={props.message}/>
         <LikesBtn likecount={props.likecount}/>
     </div>
 }
-
-export default Post;

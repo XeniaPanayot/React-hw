@@ -3,19 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from "./data/state";
+import state, {addNewDialogueMessage, getNewDialogueMessage} from "./data/state";
+import {addPost} from "./data/state"
+import Dialogues from "./components/content/dialogues/Dialogues";
 
-
+addPost("The third post")
 ReactDOM.render(
-  <React.StrictMode>
-    <App
-        myProfile={state.homePage.myProfile}
-        posts={state.homePage.posts}
-        dialoguesPage={state.dialoguesPage}
-        friends={state.friends}
-    />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <App
+            myProfile={state.homePage.myProfile}
+            posts={state.homePage.posts}
+            dialogues={state.dialogues}
+            dialogueMessages={state.dialogueMessages}
+            newDialogueMessage={state.newDialogueMessage}
+            replyMessages = {state.replyMessages}
+            addNewDialogueMessage={addNewDialogueMessage}
+            getNewDialogueMessage={getNewDialogueMessage}
+            addPost={addPost}
+            friends={state.friends}
+        />
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

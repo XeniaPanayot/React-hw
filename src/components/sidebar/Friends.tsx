@@ -4,7 +4,7 @@ import styles from './Sidebar.module.css';
 import Friend from "./Friend";
 
 type FriendsPropsType = {
-    friends: Array<{ id: number, name: string }>
+    friends: Array<{ id: string, name: string }>
 }
 const Friends = (props: FriendsPropsType) => {
 

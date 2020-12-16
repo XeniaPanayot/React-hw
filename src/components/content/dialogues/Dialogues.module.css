@@ -1,0 +1,104 @@
+.container {
+    display: grid;
+    grid-template-areas:
+    'names dialogues';
+    grid-template-columns: 15% 1fr;
+    grid-gap: 5px;
+    height: 100%;
+}
+
+.names {
+    background-color: bisque;
+    padding: 15px;
+}
+
+.namesList {
+    list-style: none;
+}
+
+.nameItem {
+    padding-bottom: 20px;
+}
+
+.name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.dialogues {
+    display: flex;
+    flex-direction: column;
+    padding-right: 30px;
+}
+
+.bubble {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    align-self: flex-start;
+    height: auto;
+    background-color: lightyellow;
+    border: 3px solid #666;
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 40px;
+}
+
+.bubble:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -23px;
+    top: 0px;
+    bottom: auto;
+    border-color: gray transparent transparent transparent;
+
+}
+
+.bubble:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+
+    right: 178px;
+    top: 9px;
+    bottom: auto;
+    border: 15px solid;
+    border-color: lightyellow transparent transparent transparent;
+
+}
+
+/* reply */
+.replyField {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+.replyBubble {
+    align-self: flex-end;
+    background-color: plum;
+}
+.replyBubble:after {
+    right: -15px;
+    border-color: plum transparent transparent transparent;
+}
+
+.dialogueText {
+    margin: 0;
+    font-style: italic;
+}
+.textarea {
+
+    margin-bottom: 20px;
+}
+.sendBtn {
+    padding: 10px;
+    background-color: plum;
+    border-radius: 5px;
+    align-self: flex-end;
+}
