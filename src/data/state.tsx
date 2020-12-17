@@ -105,7 +105,6 @@ export const getNewPost = (text: string) => {
 }
 
 export const addPost = () => {
-    debugger;
     let newPost = {
         id: v1(),
         avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
