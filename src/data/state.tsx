@@ -11,15 +11,16 @@ export type StateType = {
             name: string
             hobbies: Array<string>
         },
-        posts: Array<{
-            id: string
-            avatar: string
-            alt: string
-            message: string
-            likecount: number
-            btnName: string
-        }>
     },
+    newPost: string,
+    posts: Array<{
+        id: string
+        avatar: string
+        alt: string
+        message: string
+        likecount: number
+        btnName: string
+    }>
     dialogues: Array<{
         id: string
         name: string
@@ -29,7 +30,6 @@ export type StateType = {
         text: string
     }>,
     newDialogueMessage: string,
-
     replyMessages: Array<{ id: string, text: string }>,
     friends: Array<{
         id: string
@@ -45,24 +45,25 @@ const state: StateType = {
             name: "Valentin",
             hobbies: ["Cooking", "Hiking"]
         },
-        posts: [
-            {
-                id: v1(),
-                avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
-                alt: "My avatar",
-                message: "Hey, today I have an opinion about you!",
-                likecount: 11,
-                btnName: "Likes"
-            },
-            {
-                id: v1(),
-                avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
-                alt: "My avatar",
-                message: "Today I'm talking about them!",
-                likecount: 111,
-                btnName: "Likes"
-            }]
     },
+    newPost: "",
+    posts: [
+        {
+            id: v1(),
+            avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
+            alt: "My avatar",
+            message: "Hey, today I have an opinion about you!",
+            likecount: 11,
+            btnName: "Likes"
+        },
+        {
+            id: v1(),
+            avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
+            alt: "My avatar",
+            message: "Today I'm talking about them!",
+            likecount: 111,
+            btnName: "Likes"
+        }],
 
     dialogues: [
         {id: v1(), name: "Rita"},
@@ -96,22 +97,24 @@ export const addNewDialogueMessage = () => {
         text: state.newDialogueMessage
     }
     state.replyMessages.push(newReplyMessage)
-    console.log(newReplyMessage)
-    console.log(state.replyMessages)
-
     rerenderTree(state)
 }
+export const getNewPost = (text: string) => {
+    state.newPost = text;
+    rerenderTree(state);
+}
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
+    debugger;
     let newPost = {
         id: v1(),
         avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
         alt: "My avatar",
-        message: postMessage,
+        message: state.newPost,
         likecount: 0,
         btnName: "Likes"
     }
-    state.homePage.posts.push(newPost);
+    state.posts.push(newPost);
     console.log(newPost);
     rerenderTree(state)
 }

@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import state from "./data/state";
-import state, {addPost, getNewDialogueMessage, addNewDialogueMessage, StateType} from "./data/state"
+import state, {addPost, getNewDialogueMessage, addNewDialogueMessage, StateType, getNewPost} from "./data/state"
 
 export let rerenderTree = (state: StateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App
                 myProfile={state.homePage.myProfile}
-                posts={state.homePage.posts}
+                posts={state.posts}
+                getNewPost={getNewPost}
                 addPost={addPost}
                 dialogues={state.dialogues}
                 dialogueMessages={state.dialogueMessages}

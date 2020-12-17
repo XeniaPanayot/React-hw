@@ -9,7 +9,7 @@ import News from "./components/content/news/News";
 import Contacts from "./components/content/contacts/Contacts";
 import Dialogues from "./components/content/dialogues/Dialogues";
 import MyPosts from "./components/content/home/posts/MyPosts";
-import state, {addNewDialogueMessage} from "./data/state";
+import state, {addNewDialogueMessage, getNewPost} from "./data/state";
 
 
 type AppPropsType = {
@@ -23,11 +23,12 @@ type AppPropsType = {
     dialogues: Array<{ id: string, name: string }>
     dialogueMessages: Array<{ id: string, text: string }>
     newDialogueMessage: string,
-    replyMessages: {id: string, text: string }[],
+    replyMessages: { id: string, text: string }[],
     getNewDialogueMessage: (text: string) => void
     addNewDialogueMessage: () => void
     friends: Array<{ id: string, name: string }>
-    addPost: (postMessage: string) => void
+    getNewPost: (text: string) => void
+    addPost: () => void
 }
 
 
@@ -39,8 +40,12 @@ function App(props: AppPropsType) {
                 <Sidebar friends={props.friends}
                 />
                 <div className='container-bg'>
-                    <Route path='/home' render={() => <MainContent myProfile={props.myProfile}/>}/>
-                    <Route path='/posts' render={() => <MyPosts postsData={props.posts} addPost={props.addPost}/>}/>
+                    <Route path='/home' render={() => <MainContent
+                        myProfile={props.myProfile}/>}/>
+                    <Route path='/posts' render={() => <MyPosts
+                        postsData={props.posts}
+                        getNewPost={props.getNewPost}
+                        addPost={props.addPost}/>}/>
                     <Route path='/messages' render={() => <Dialogues dialogues={props.dialogues}
                                                                      dialogueMessages={props.dialogueMessages}
                                                                      newDialogueMessage={props.newDialogueMessage}

@@ -3,22 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {addNewDialogueMessage, getNewDialogueMessage} from "./data/state";
+import state, {addNewDialogueMessage, getNewDialogueMessage, getNewPost} from "./data/state";
 import {addPost} from "./data/state"
 import Dialogues from "./components/content/dialogues/Dialogues";
 
-addPost("The third post")
 ReactDOM.render(
     <React.StrictMode>
         <App
             myProfile={state.homePage.myProfile}
-            posts={state.homePage.posts}
+            posts={state.posts}
             dialogues={state.dialogues}
             dialogueMessages={state.dialogueMessages}
             newDialogueMessage={state.newDialogueMessage}
             replyMessages = {state.replyMessages}
             addNewDialogueMessage={addNewDialogueMessage}
             getNewDialogueMessage={getNewDialogueMessage}
+            getNewPost={getNewPost}
             addPost={addPost}
             friends={state.friends}
         />
