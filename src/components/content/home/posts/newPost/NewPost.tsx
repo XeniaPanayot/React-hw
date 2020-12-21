@@ -1,21 +1,22 @@
 import React from 'react';
 import styles from '../Posts.module.css';
-import {getNewPost} from "../../../../../data/state";
+import {ActionTypes} from "../../../../../data/state";
 
 type NewPostPropsType = {
     cols: number
     rows: number
     name: string
     id: string
-    getNewPost: (text: string) => void
-    addPost: () => void
+    dispatch: (action: ActionTypes) => void
+    // getNewPost: (text: string) => void
+    // addPost: () => void
 }
 const NewPost = (props: NewPostPropsType) => {
     let NewPostContent = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
         if (NewPostContent.current?.value !== undefined) {
             let postContent = NewPostContent.current?.value;
-            props.addPost();
+            props.dispatch({type: "ADD-POST"});
             NewPostContent.current.value = '';
         }
     }
@@ -26,7 +27,7 @@ const NewPost = (props: NewPostPropsType) => {
                   id={props.id} name={props.name}
                   onChange={ (event) => {
                       let enteredText = event.currentTarget.value;
-                      props.getNewPost(enteredText)
+                      props.dispatch({type: 'GET-NEW-POST', text: enteredText})
                       console.log(enteredText)
                   }
                   }

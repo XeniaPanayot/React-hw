@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dialogues.module.css';
 import DialogueReplyField from "./DialoguesReply";
-import App from "../../../App";
+import {ActionTypes} from "../../../data/state";
 
 type DialogueNameType = {
     id: string
@@ -22,19 +22,13 @@ const Dialogue = (props: DialoguePropsType) => {
         <p className={styles.dialogueText}>{props.message}</p>
     </div>
 }
-// const DialogueReply = () => {
-//     return <div className={ `${styles.replyBubble} ${styles.bubble}` } >
-//         <p className={styles.dialogueText}>{"New from textarea"}</p>
-//     </div>
-// }
 
 type DialoguesPropsType = {
     dialogues: Array<{ id: string, name: string }>,
     dialogueMessages: Array<{ id: string, text: string }>,
     newDialogueMessage: string,
     replyMessages: { id: string, text: string }[],
-    addNewDialogueMessage: () => void
-    getNewDialogueMessage: (text: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 
@@ -53,9 +47,9 @@ const Dialogues = (props: DialoguesPropsType) => {
             {dialogueContentElements}
             <DialogueReplyField
                 newDialogueMessage={props.newDialogueMessage}
-                getNewDialogueMessage={props.getNewDialogueMessage}
+                dispatch={props.dispatch}
                 replyMessages={props.replyMessages}
-                addNewDialogueMessage={props.addNewDialogueMessage}/>
+            />
         </div>
 
 

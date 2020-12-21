@@ -1,27 +1,24 @@
 import React, {useState} from 'react';
 import styles from './Dialogues.module.css';
+import {ActionTypes} from "../../../data/state";
 
 type DialogueReplyFieldPropsType = {
-    getNewDialogueMessage: (text: string) => void,
     newDialogueMessage: string,
-    replyMessages: {id: string, text: string }[],
-    addNewDialogueMessage: () => void
+    replyMessages: { id: string, text: string }[],
+    dispatch: (action: ActionTypes) => void
 }
 
 type DialogueTextareaPropsType = {
     newDialogueMessage: string,
-    getNewDialogueMessage: (text: string) => void
-}
+    dispatch: (action: ActionTypes) => void
+q}
 const DialogueTextarea = (props: DialogueTextareaPropsType) => {
-    // let [content, setContent] = useState('Content inside txtarea')
     return <textarea
         value={props.newDialogueMessage}
         onChange={(e) => {
 
-             let enteredText = e.currentTarget.value;
-             props.getNewDialogueMessage(enteredText);
-             // setContent(props.newDialogueMessage);
-             // console.log(content)
+            let enteredText = e.currentTarget.value;
+            props.dispatch({type: 'GET-NEW-DIALOGUE-MESSAGE', text: enteredText});
             e.currentTarget.value = "";
 
         }}
@@ -33,16 +30,13 @@ const DialogueTextarea = (props: DialogueTextareaPropsType) => {
 }
 
 type DualogueBtnPropsType = {
-    addNewDialogueMessage: () => void
-    getNewDialogueMessage: (text: string) => void
-    // newMessageContent: string
-    // addMessage: (newMessageContent: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 const DualogueBtn = (props: DualogueBtnPropsType) => {
     return <button
         onClick={() => {
-            props.addNewDialogueMessage();
-            props.getNewDialogueMessage("")
+            props.dispatch({type: 'ADD-NEW-DIALOGUE-MESSAGE'});
+            props.dispatch({type: 'GET-NEW-DIALOGUE-MESSAGE', text: ""});
         }}
         className={styles.sendBtn}>
         Send
@@ -50,7 +44,7 @@ const DualogueBtn = (props: DualogueBtnPropsType) => {
 }
 
 type DialogueReplyPropsType = {
-    replyMessages: {id: string, text: string }[],
+    replyMessages: { id: string, text: string }[],
     newDialogueMessage: string
 }
 
@@ -61,13 +55,12 @@ const DialogueReply = (props: DialogueReplyPropsType) => {
 }
 
 
-
 const DialogueReplyField = (props: DialogueReplyFieldPropsType) => {
 
     return <div className={styles.replyField}>
         <DialogueReply newDialogueMessage={props.newDialogueMessage} replyMessages={props.replyMessages}/>
-        <DialogueTextarea newDialogueMessage={props.newDialogueMessage} getNewDialogueMessage={props.getNewDialogueMessage}/>
-        <DualogueBtn addNewDialogueMessage={props.addNewDialogueMessage} getNewDialogueMessage={props.getNewDialogueMessage}/>
+        <DialogueTextarea newDialogueMessage={props.newDialogueMessage} dispatch={props.dispatch}/>
+        <DualogueBtn dispatch={props.dispatch}/>
     </div>
 }
 

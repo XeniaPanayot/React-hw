@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './Posts.module.css';
 import {Post} from "./post/Post";
 import NewPost from "./newPost/NewPost";
+import {ActionTypes} from "../../../../data/state";
 
 type MyPostsPropsType = {
     postsData: Array< {id: string, avatar: string, alt: string, message: string, likecount: number, btnName: string}>
-    getNewPost: (text: string) => void
-    addPost: () => void
+    dispatch: (action: ActionTypes) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -19,8 +19,8 @@ const MyPosts = (props: MyPostsPropsType) => {
             cols={122} rows={22}
             id={`newPost`}
             name={`newPost`}
-            getNewPost={props.getNewPost}
-            addPost={props.addPost}/>
+            dispatch={props.dispatch}
+            />
         { MyPostsElement }
     </article>
 }

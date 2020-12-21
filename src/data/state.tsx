@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {v1} from "uuid";
-import {rerenderTree} from "../render";
-import App from "../App";
 
 export type StateType = {
     homePage: {
@@ -36,86 +34,119 @@ export type StateType = {
         name: string
     }>
 }
+export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _onChange: () => void
+    subscribe: (callback: () => void) => void
+    dispatch: (action: ActionTypes) => void
+}
+type GetNewPostActionType = {
+    type: 'GET-NEW-POST'
+    text: string
+}
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type getNewDialogueMessage = {
+    type: 'GET-NEW-DIALOGUE-MESSAGE'
+    text: string
+}
+type addNewDialogueMessage = {
+    type: 'ADD-NEW-DIALOGUE-MESSAGE'
+}
 
-const state: StateType = {
-    homePage: {
-        myProfile: {
-            src: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
-            alt: "My avatar",
-            name: "Valentin",
-            hobbies: ["Cooking", "Hiking"]
+
+export type ActionTypes = GetNewPostActionType | AddPostActionType | getNewDialogueMessage | addNewDialogueMessage;
+
+
+const store: StoreType = {
+    _state: {
+        homePage: {
+            myProfile: {
+                src: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
+                alt: "My avatar",
+                name: "Valentin",
+                hobbies: ["Cooking", "Hiking"]
+            },
         },
+        newPost: "",
+        posts: [
+            {
+                id: v1(),
+                avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
+                alt: "My avatar",
+                message: "Hey, today I have an opinion about you!",
+                likecount: 11,
+                btnName: "Likes"
+            },
+            {
+                id: v1(),
+                avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
+                alt: "My avatar",
+                message: "Today I'm talking about them!",
+                likecount: 111,
+                btnName: "Likes"
+            }],
+        newDialogueMessage: "",
+        dialogues: [
+            {id: v1(), name: "Rita"},
+            {id: v1(), name: "Roma"},
+            {id: v1(), name: "Rimma"}
+        ],
+        dialogueMessages: [
+            {id: v1(), text: "text33"},
+            {id: v1(), text: "text44"}
+        ],
+        replyMessages: [
+            {id: v1(), text: "reply to text33"},
+            {id: v1(), text: "reply to  text44"}
+        ],
+        friends: [
+            {id: v1(), name: "Alla"},
+            {id: v1(), name: "Anna"},
+            {id: v1(), name: "Arbuz"}
+        ],
     },
-    newPost: "",
-    posts: [
-        {
-            id: v1(),
-            avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
-            alt: "My avatar",
-            message: "Hey, today I have an opinion about you!",
-            likecount: 11,
-            btnName: "Likes"
-        },
-        {
-            id: v1(),
-            avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
-            alt: "My avatar",
-            message: "Today I'm talking about them!",
-            likecount: 111,
-            btnName: "Likes"
-        }],
+    getState() {
+        return this._state
+    },
+    subscribe(callback) {
+        this._onChange = callback;
+    },
+    _onChange() {
+        console.log("The state is changed -  это заглушка")
+    },
 
-    dialogues: [
-        {id: v1(), name: "Rita"},
-        {id: v1(), name: "Roma"},
-        {id: v1(), name: "Rimma"}
-    ],
-    dialogueMessages: [
-        {id: v1(), text: "text33"},
-        {id: v1(), text: "text44"}
-    ],
-    newDialogueMessage: "",
-    replyMessages: [
-        {id: v1(), text: "reply to text33"},
-        {id: v1(), text: "reply to  text44"}
-    ],
-    friends: [
-        {id: v1(), name: "Alla"},
-        {id: v1(), name: "Anna"},
-        {id: v1(), name: "Arbuz"}
-    ],
-};
-
-export const getNewDialogueMessage = (text: string) => {
-    state.newDialogueMessage = text;
-    rerenderTree(state);
-}
-
-export const addNewDialogueMessage = () => {
-    const newReplyMessage = {
-        id: v1(),
-        text: state.newDialogueMessage
+    dispatch(action) {
+        if (action.type === 'GET-NEW-POST') {
+            this._state.newPost = action.text;
+            this._onChange();
+        } else if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: v1(),
+                avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
+                alt: "My avatar",
+                message: this._state.newPost,
+                likecount: 0,
+                btnName: "Likes"
+            }
+            this._state.posts.push(newPost);
+            console.log(newPost);
+            this._onChange()
+        } else if (action.type === 'GET-NEW-DIALOGUE-MESSAGE') {
+            this._state.newDialogueMessage = action.text;
+            this._onChange();
+        } else if (action.type === 'ADD-NEW-DIALOGUE-MESSAGE') {
+            const newReplyMessage = {
+                id: v1(),
+                text: this._state.newDialogueMessage
+            }
+            this._state.replyMessages.push(newReplyMessage)
+            this._onChange()
+        }
     }
-    state.replyMessages.push(newReplyMessage)
-    rerenderTree(state)
-}
-export const getNewPost = (text: string) => {
-    state.newPost = text;
-    rerenderTree(state);
 }
 
-export const addPost = () => {
-    let newPost = {
-        id: v1(),
-        avatar: "https://i.pinimg.com/originals/67/48/70/674870a1014ba8fab563f24a9646d0df.jpg",
-        alt: "My avatar",
-        message: state.newPost,
-        likecount: 0,
-        btnName: "Likes"
-    }
-    state.posts.push(newPost);
-    console.log(newPost);
-    rerenderTree(state)
-}
+export default store;
 
-export default state;

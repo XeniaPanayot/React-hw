@@ -9,49 +9,38 @@ import News from "./components/content/news/News";
 import Contacts from "./components/content/contacts/Contacts";
 import Dialogues from "./components/content/dialogues/Dialogues";
 import MyPosts from "./components/content/home/posts/MyPosts";
-import state, {addNewDialogueMessage, getNewPost} from "./data/state";
+import store from "./data/state";
+import {StoreType} from "./data/state";
 
 
 type AppPropsType = {
-    myProfile: {
-        src: string
-        alt: string
-        name: string,
-        hobbies: Array<string>
-    }
-    posts: Array<{ id: string, avatar: string, alt: string, message: string, likecount: number, btnName: string }>
-    dialogues: Array<{ id: string, name: string }>
-    dialogueMessages: Array<{ id: string, text: string }>
-    newDialogueMessage: string,
-    replyMessages: { id: string, text: string }[],
-    getNewDialogueMessage: (text: string) => void
-    addNewDialogueMessage: () => void
-    friends: Array<{ id: string, name: string }>
-    getNewPost: (text: string) => void
-    addPost: () => void
+    store: StoreType
 }
 
+const App: React.FC<AppPropsType> = (props) => {
+    const state = props.store.getState();
 
-function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className='container'>
                 <Header/>
-                <Sidebar friends={props.friends}
+                <Sidebar friends={state.friends}
                 />
                 <div className='container-bg'>
                     <Route path='/home' render={() => <MainContent
-                        myProfile={props.myProfile}/>}/>
+                        myProfile={state.homePage.myProfile}/>}/>
                     <Route path='/posts' render={() => <MyPosts
-                        postsData={props.posts}
-                        getNewPost={props.getNewPost}
-                        addPost={props.addPost}/>}/>
-                    <Route path='/messages' render={() => <Dialogues dialogues={props.dialogues}
-                                                                     dialogueMessages={props.dialogueMessages}
-                                                                     newDialogueMessage={props.newDialogueMessage}
-                                                                     replyMessages={props.replyMessages}
-                                                                     addNewDialogueMessage={props.addNewDialogueMessage}
-                                                                     getNewDialogueMessage={props.getNewDialogueMessage}/>}/>
+                        postsData={state.posts}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                    />}/>
+                    <Route path='/messages' render={() => <Dialogues
+                        dialogues={state.dialogues}
+                        dialogueMessages={state.dialogueMessages}
+                        newDialogueMessage={state.newDialogueMessage}
+                        replyMessages={state.replyMessages}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                    />}
+                    />
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/blog' render={() => <Blog/>}/>
                     <Route path='/contacts' render={() => <Contacts/>}/>
