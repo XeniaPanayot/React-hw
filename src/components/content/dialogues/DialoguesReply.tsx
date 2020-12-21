@@ -11,7 +11,7 @@ type DialogueReplyFieldPropsType = {
 type DialogueTextareaPropsType = {
     newDialogueMessage: string,
     dispatch: (action: ActionTypes) => void
-q}
+}
 const DialogueTextarea = (props: DialogueTextareaPropsType) => {
     return <textarea
         value={props.newDialogueMessage}
