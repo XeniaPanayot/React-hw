@@ -8,15 +8,32 @@ type NewPostPropsType = {
     name: string
     id: string
     dispatch: (action: ActionTypes) => void
-    // getNewPost: (text: string) => void
-    // addPost: () => void
 }
+export type getNewPostActionType = (postText: string) => {
+    type: 'GET-NEW-POST',
+    text: string
+}
+export const getNewPostAction: getNewPostActionType = (postText: string) => {
+    return {
+        type: 'GET-NEW-POST',
+        text: postText
+    }
+}
+export type addPostActionType = () => {
+    type: 'ADD-POST',
+}
+export const addPostAction: addPostActionType = () => {
+    return {
+        type: 'ADD-POST'
+    }
+}
+
 const NewPost = (props: NewPostPropsType) => {
     let NewPostContent = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
         if (NewPostContent.current?.value !== undefined) {
             let postContent = NewPostContent.current?.value;
-            props.dispatch({type: "ADD-POST"});
+            props.dispatch(addPostAction());
             NewPostContent.current.value = '';
         }
     }
@@ -25,14 +42,15 @@ const NewPost = (props: NewPostPropsType) => {
                   className={styles.posts__textarea}
                   cols={props.cols} rows={props.rows}
                   id={props.id} name={props.name}
-                  onChange={ (event) => {
+                  onChange={(event) => {
                       let enteredText = event.currentTarget.value;
-                      props.dispatch({type: 'GET-NEW-POST', text: enteredText})
-                      console.log(enteredText)
+                      props.dispatch(getNewPostAction(enteredText))
                   }
                   }
         />
-        <button onClick={ () => {addPost()} }>
+        <button onClick={() => {
+            addPost()
+        }}>
             Add post
         </button>
     </div>

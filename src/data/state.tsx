@@ -58,6 +58,13 @@ type addNewDialogueMessage = {
 
 
 export type ActionTypes = GetNewPostActionType | AddPostActionType | getNewDialogueMessage | addNewDialogueMessage;
+export type getNewDialogueMessageActionCreatorType = (message: string) => {
+    type: 'GET-NEW-DIALOGUE-MESSAGE',
+    text: string
+}
+export type addNewDialogueMessageActionCreatorType = () => {
+    type: 'ADD-NEW-DIALOGUE-MESSAGE'
+}
 
 
 const store: StoreType = {
@@ -147,6 +154,19 @@ const store: StoreType = {
         }
     }
 }
+
+export const getNewDialogueMessageActionCreator: getNewDialogueMessageActionCreatorType = (message: string) => {
+    return {
+        type: 'GET-NEW-DIALOGUE-MESSAGE',
+        text: message
+    }
+}
+export const addNewDialogueMessageActionCreator: addNewDialogueMessageActionCreatorType = () => {
+    return {
+        type: 'ADD-NEW-DIALOGUE-MESSAGE'
+    }
+}
+
 
 export default store;
 

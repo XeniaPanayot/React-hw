@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from './Dialogues.module.css';
-import {ActionTypes} from "../../../data/state";
+import {ActionTypes, addNewDialogueMessageActionCreator, getNewDialogueMessageActionCreator} from "../../../data/state";
 
 type DialogueReplyFieldPropsType = {
     newDialogueMessage: string,
@@ -12,6 +12,7 @@ type DialogueTextareaPropsType = {
     newDialogueMessage: string,
     dispatch: (action: ActionTypes) => void
 }
+
 const DialogueTextarea = (props: DialogueTextareaPropsType) => {
     return <textarea
         value={props.newDialogueMessage}
@@ -35,8 +36,8 @@ type DualogueBtnPropsType = {
 const DualogueBtn = (props: DualogueBtnPropsType) => {
     return <button
         onClick={() => {
-            props.dispatch({type: 'ADD-NEW-DIALOGUE-MESSAGE'});
-            props.dispatch({type: 'GET-NEW-DIALOGUE-MESSAGE', text: ""});
+            props.dispatch(addNewDialogueMessageActionCreator());
+            props.dispatch(getNewDialogueMessageActionCreator(''));
         }}
         className={styles.sendBtn}>
         Send
