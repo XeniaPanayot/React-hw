@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Dialogues.module.css';
 import DialogueReplyField from "./DialoguesReply";
+import {ActionDialogueTypes} from "../../../data/new_dialogue_reducer";
 import {ActionTypes} from "../../../data/state";
 
 type DialogueNameType = {
@@ -28,9 +29,11 @@ type DialoguesPropsType = {
     dialogueMessages: Array<{ id: string, text: string }>,
     newDialogueMessage: string,
     replyMessages: { id: string, text: string }[],
-    dispatch: (action: ActionTypes) => void
-}
+    getEnteredText: (text: string)=>void
+    addDialogueMessage: ()=>void
 
+    // dispatch: (action: ActionTypes) => void
+}
 
 const Dialogues = (props: DialoguesPropsType) => {
     let dialogueNameElements = props.dialogues.map(n => <DialogueName id={n.id} name={n.name}/>);
@@ -45,14 +48,14 @@ const Dialogues = (props: DialoguesPropsType) => {
         </div>
         <div className={styles.dialogues}>
             {dialogueContentElements}
+
             <DialogueReplyField
                 newDialogueMessage={props.newDialogueMessage}
-                dispatch={props.dispatch}
+                getEnteredText={props.getEnteredText}
                 replyMessages={props.replyMessages}
+                addDialogueMessage={ props.addDialogueMessage }
             />
         </div>
-
-
     </div>
 }
 

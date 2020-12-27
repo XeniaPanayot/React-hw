@@ -1,31 +1,14 @@
 import React from 'react';
 import styles from '../Posts.module.css';
-import {ActionTypes} from "../../../../../data/state";
+import {ActionPostTypes} from "../../../../../data/newPost_reducer";
 
 type NewPostPropsType = {
     cols: number
     rows: number
     name: string
     id: string
-    dispatch: (action: ActionTypes) => void
-}
-export type getNewPostActionType = (postText: string) => {
-    type: 'GET-NEW-POST',
-    text: string
-}
-export const getNewPostAction: getNewPostActionType = (postText: string) => {
-    return {
-        type: 'GET-NEW-POST',
-        text: postText
-    }
-}
-export type addPostActionType = () => {
-    type: 'ADD-POST',
-}
-export const addPostAction: addPostActionType = () => {
-    return {
-        type: 'ADD-POST'
-    }
+    addPost: ()=> void
+    getPost: (eneterdText: string)=>void
 }
 
 const NewPost = (props: NewPostPropsType) => {
@@ -33,7 +16,7 @@ const NewPost = (props: NewPostPropsType) => {
     const addPost = () => {
         if (NewPostContent.current?.value !== undefined) {
             let postContent = NewPostContent.current?.value;
-            props.dispatch(addPostAction());
+            props.addPost();
             NewPostContent.current.value = '';
         }
     }
@@ -42,9 +25,10 @@ const NewPost = (props: NewPostPropsType) => {
                   className={styles.posts__textarea}
                   cols={props.cols} rows={props.rows}
                   id={props.id} name={props.name}
+                  placeholder={"Enter new post here"}
                   onChange={(event) => {
                       let enteredText = event.currentTarget.value;
-                      props.dispatch(getNewPostAction(enteredText))
+                      props.getPost(enteredText)
                   }
                   }
         />

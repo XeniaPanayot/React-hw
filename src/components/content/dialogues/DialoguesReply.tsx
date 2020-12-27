@@ -1,28 +1,33 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import styles from './Dialogues.module.css';
-import {ActionTypes, addNewDialogueMessageActionCreator, getNewDialogueMessageActionCreator} from "../../../data/state";
+import {ActionDialogueTypes, addNewDialogueMessageActionCreator, getNewDialogueMessageActionCreator} from "../../../data/new_dialogue_reducer";
+import {ActionTypes} from "../../../data/state";
 
 type DialogueReplyFieldPropsType = {
     newDialogueMessage: string,
     replyMessages: { id: string, text: string }[],
-    dispatch: (action: ActionTypes) => void
+    getEnteredText: (text: string)=>void
+    addDialogueMessage: ()=>void
+
 }
 
 type DialogueTextareaPropsType = {
     newDialogueMessage: string,
-    dispatch: (action: ActionTypes) => void
+    getEnteredText: (text: string)=>void
+    // dispatch: (action: ActionTypes) => void
 }
 
 const DialogueTextarea = (props: DialogueTextareaPropsType) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let enteredText = e.currentTarget.value;
+        props.getEnteredText(enteredText)
+        // props.dispatch({type: 'GET-NEW-DIALOGUE-MESSAGE', text: enteredText});
+        e.currentTarget.value = "";
+    }
+
     return <textarea
         value={props.newDialogueMessage}
-        onChange={(e) => {
-
-            let enteredText = e.currentTarget.value;
-            props.dispatch({type: 'GET-NEW-DIALOGUE-MESSAGE', text: enteredText});
-            e.currentTarget.value = "";
-
-        }}
+        onChange ={ onChangeHandler }
         className={styles.textarea}
         name="newDialogueMessage"
         id=""
@@ -31,13 +36,20 @@ const DialogueTextarea = (props: DialogueTextareaPropsType) => {
 }
 
 type DualogueBtnPropsType = {
-    dispatch: (action: ActionTypes) => void
+    addDialogueMessage: ()=>void
+    // dispatch: (action: ActionTypes) => void
 }
 const DualogueBtn = (props: DualogueBtnPropsType) => {
+    const onBtnClickHandler = () => {
+        props.addDialogueMessage()
+    }
+
     return <button
         onClick={() => {
-            props.dispatch(addNewDialogueMessageActionCreator());
-            props.dispatch(getNewDialogueMessageActionCreator(''));
+            onBtnClickHandler()
+
+            // props.dispatch(addNewDialogueMessageActionCreator());
+            // props.dispatch(getNewDialogueMessageActionCreator(''));
         }}
         className={styles.sendBtn}>
         Send
@@ -55,13 +67,12 @@ const DialogueReply = (props: DialogueReplyPropsType) => {
     </div>
 }
 
-
 const DialogueReplyField = (props: DialogueReplyFieldPropsType) => {
 
     return <div className={styles.replyField}>
         <DialogueReply newDialogueMessage={props.newDialogueMessage} replyMessages={props.replyMessages}/>
-        <DialogueTextarea newDialogueMessage={props.newDialogueMessage} dispatch={props.dispatch}/>
-        <DualogueBtn dispatch={props.dispatch}/>
+        <DialogueTextarea newDialogueMessage={props.newDialogueMessage} getEnteredText={props.getEnteredText}/>
+        <DualogueBtn addDialogueMessage={props.addDialogueMessage}/>
     </div>
 }
 
